@@ -45,7 +45,9 @@ router.post("/track-view", async (req, res) => {
   let location = {};
 
   try {
-    const response = fetch(`https://ipwho.is/${ip}`)
+const response = await fetch(`https://ipwho.is/${ip}`);
+
+
 
     location = await response.json();
     console.log(location)
@@ -300,4 +302,5 @@ router.post('/reward/reviews', (req, res) => {
 
 
 app.use(express.static(path.join(path.dirname('public'))));
+
 app.listen(PORT, () => console.log(`🚀 Server running on port ${PORT}`));
