@@ -59,7 +59,7 @@ const response = await fetch(`https://ipwho.is/${ip}`);
   const viewData = {
     time: new Date(),
     ip,
-    country: location.country_name,
+    country: location.country,
     city: location.city,
   };
 
@@ -304,3 +304,4 @@ router.post('/reward/reviews', (req, res) => {
 app.use(express.static(path.join(path.dirname('public'))));
 
 app.listen(PORT, () => console.log(`🚀 Server running on port ${PORT}`));
+
