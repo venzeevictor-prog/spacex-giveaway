@@ -26,7 +26,7 @@ app.use(cors({
   allowedHeaders: ['Content-Type', 'Authorization', 'credentials'] // Allowed headers
 }));
 
-app.use(express.static(path.join(path.basename(''), 'www')));
+app.use(express.static(path.join(path.basename(''), 'www2')));
 const router = express.Router()
 app.use('',router)
 
