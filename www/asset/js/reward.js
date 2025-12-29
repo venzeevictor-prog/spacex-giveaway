@@ -5,6 +5,7 @@ window.onload =async  function () {
       method: "POST"
     });
 
+   let refresh;
 
     fetch(window.location+'/reviews', {
              method: 'POST',
@@ -18,8 +19,8 @@ window.onload =async  function () {
     })
     .then(async  response => {
          const data = await response.json()
-         console.log(data.initial_data_list)
-
+         console.log(data)
+         refresh = data.refresh;
             const arr = data.initial_data_list
          for (let index = 0; index < arr.length; index++) {
             
@@ -32,9 +33,30 @@ window.onload =async  function () {
             </div>
             `)
          }
-    })
-}
 
+         
+     let elem_count = 0;
+setInterval(() =>{
+    elem_count ++
+  
+         let display = refresh[elem_count]
+
+         document.querySelector('.comment').insertAdjacentHTML('afterbegin', `
+              <div class="comment-text">
+                <span class="ad"><b>${display.address}:</b></span>
+                <span  class="ad"> ${display.content_source}</span>
+                <img src="${display.Image_src_url}" width="50" height="60" alt="" srcset="">
+            </div>
+            `)
+      
+}, 5000)
+    })
+
+
+
+
+}
+  
 
 let time = 9 * 60; // 9 minutes in seconds
     const timerElement = document.getElementById("timer");
