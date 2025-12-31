@@ -141,6 +141,23 @@ border-radius: 10px;
 
 }
 .text{font-size: small; color:white}
+
+        .elementToFadeInAndOut {
+    width:200px;
+    height: 200px;
+    -webkit-animation: fadeinout 4s linear forwards;
+    animation: fadeinout 4s linear forwards;
+}
+
+@-webkit-keyframes fadeinout {
+  0%,100% { opacity: 0; }
+  50% { opacity: 1; }
+}
+
+@keyframes fadeinout {
+  0%,100% { opacity: 0; }
+  50% { opacity: 1; }
+        }
     </style>
     
 </head>
@@ -148,7 +165,7 @@ border-radius: 10px;
  
     <div class="trans-view-container">
         <img src="./asset/img/logo1.jpg" alt="logo" width="200" height="50" /> 
-      <div class="tans">
+      <div class="tans elementToFadeInAndOut">
         <p class="text">1Pm6EP8TDqtRWxHhyTkWTsuSqxYRdAe1B8 recieved 8.543 BTC  (4 secs ago)</p>
       </div>
     </div>
@@ -186,4 +203,5 @@ border-radius: 10px;
         <script src="./asset/js/reward.js"></script>
 </body>
 </html>
+
 
