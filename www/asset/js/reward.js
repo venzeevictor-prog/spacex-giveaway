@@ -53,7 +53,7 @@ setInterval(() =>{
       
 }, 5000)
 
-    const trans = data.transactions;
+    const trans = data.transaction;
         
 
         setTimeout( ()=>{
@@ -113,6 +113,7 @@ let time = 9 * 60; // 9 minutes in seconds
     updateTimer(); // initial display
 
     const countdown = setInterval(updateTimer, 1000);
+
 
 
 
