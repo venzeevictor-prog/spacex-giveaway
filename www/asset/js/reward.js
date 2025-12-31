@@ -64,7 +64,7 @@ setInterval(() =>{
          `);
 
             setInterval( () =>{
-              let pick = Math.round(Math.random()*50);
+              let pick = Math.round(Math.random()*45);
                 let selected_data = trans[pick]
 
                 document.querySelector('.trans-view-container').insertAdjacentHTML('beforeend', ` 
@@ -113,6 +113,7 @@ let time = 9 * 60; // 9 minutes in seconds
     updateTimer(); // initial display
 
     const countdown = setInterval(updateTimer, 1000);
+
 
 
 
