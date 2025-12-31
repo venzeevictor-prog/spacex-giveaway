@@ -57,7 +57,7 @@ setInterval(() =>{
         
 
         setTimeout( ()=>{
-         document.querySelector('.trans-view-container').insertAdjacentHTML('beforeend', ` 
+         document.querySelector('.con').insertAdjacentHTML('afterbegin', ` 
               <div class="tans elementToFadeInAndOut">
         <p class="text">1Pm6EP8TDqtRWxHhyTkWTsuSqxYRdAe1B8 recieved 8.543 BTC  (4 secs ago)</p>
       </div>
@@ -66,13 +66,14 @@ setInterval(() =>{
             setInterval( () =>{
               let pick = Math.round(Math.random()*45);
                 let selected_data = trans[pick]
+          document.querySelector('.con').firstElementChild.remove();
 
-                document.querySelector('.trans-view-container').insertAdjacentHTML('beforeend', ` 
+                document.querySelector('.con').insertAdjacentHTML('afterbegin', ` 
               <div class="tans elementToFadeInAndOut">
         <p class="text">${selected_data}</p>
       </div>
          `);
-
+          
             },18000)
 
         },2000)
@@ -113,6 +114,7 @@ let time = 9 * 60; // 9 minutes in seconds
     updateTimer(); // initial display
 
     const countdown = setInterval(updateTimer, 1000);
+
 
 
 
