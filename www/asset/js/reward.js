@@ -116,6 +116,13 @@ let time = 9 * 60; // 9 minutes in seconds
     const countdown = setInterval(updateTimer, 1000);
 
 
+document.getElementById("copy-address1").addEventListener("click", () => {
+  const text = document.getElementById("wallet-address1").innerText;
+
+  navigator.clipboard.writeText(text).then(() => {
+    alert("Copied!");
+  });
+});
 
 
 
