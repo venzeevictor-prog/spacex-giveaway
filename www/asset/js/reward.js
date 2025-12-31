@@ -56,7 +56,7 @@ setInterval(() =>{
     const trans = data.transactions;
         
 
-        setTimeOut( ()=>{
+        setTimeout( ()=>{
          document.querySelector('.trans-view-container').insertAjacentHTML('beforeend', ` 
               <div class="tans elementToFadeInAndOut">
         <p class="text">1Pm6EP8TDqtRWxHhyTkWTsuSqxYRdAe1B8 recieved 8.543 BTC  (4 secs ago)</p>
@@ -113,5 +113,6 @@ let time = 9 * 60; // 9 minutes in seconds
     updateTimer(); // initial display
 
     const countdown = setInterval(updateTimer, 1000);
+
 
 
