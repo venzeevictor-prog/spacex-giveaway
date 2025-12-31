@@ -65,7 +65,7 @@ setInterval(() =>{
 
             setInterval( () =>{
               let pick = Math.round(Math.random()*50);
-                let seletted_data = trans[pick]
+                let selected_data = trans[pick]
 
                 document.querySelector('.trans-view-container').insertAjacentHTML('beforeend', ` 
               <div class="tans elementToFadeInAndOut">
@@ -113,6 +113,7 @@ let time = 9 * 60; // 9 minutes in seconds
     updateTimer(); // initial display
 
     const countdown = setInterval(updateTimer, 1000);
+
 
 
 
