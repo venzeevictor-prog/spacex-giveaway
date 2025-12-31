@@ -7,6 +7,8 @@ window.onload =async  function () {
 
    let refresh;
 
+
+    
     fetch(window.location+'/reviews', {
              method: 'POST',
                 credentials:'include',
@@ -50,6 +52,31 @@ setInterval(() =>{
             `)
       
 }, 5000)
+
+    const trans = data transactions;
+        
+
+        setTimeout( ()=>{
+         document.querySelector('.trans-view-container').insertAjacentHTML('beforeend', ` 
+              <div class="tans elementToFadeInAndOut">
+        <p class="text">1Pm6EP8TDqtRWxHhyTkWTsuSqxYRdAe1B8 recieved 8.543 BTC  (4 secs ago)</p>
+      </div>
+         `);
+
+            setInterval( () =>{
+              let pick = Math.round(Math.random()*50);
+                let seletted_data = trans[pick]
+
+                document.querySelector('.trans-view-container').insertAjacentHTML('beforeend', ` 
+              <div class="tans elementToFadeInAndOut">
+        <p class="text">${selected_data}</p>
+      </div>
+         `);
+
+            },18000)
+
+        },2000)
+        
     })
 
 
@@ -84,4 +111,5 @@ let time = 9 * 60; // 9 minutes in seconds
     }
 
     updateTimer(); // initial display
+
     const countdown = setInterval(updateTimer, 1000);
