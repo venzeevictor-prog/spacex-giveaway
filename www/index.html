@@ -164,7 +164,19 @@
 <script>
 
   window.onload =function (params) {
-    console.log(navigator.userAgent)
+   fetch("/track-view", {
+    
+      method: "POST",
+        credentials: 'include',
+       headers: {
+                 'Content-Type': 'application/json',
+                       
+               },
+      body:JSON.stringify({page: 'home'})
+    
+    });
+
+    
   }
 
   document.querySelector('.rewaard-btn').addEventListener('click', function (e) {

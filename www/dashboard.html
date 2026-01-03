@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Web Page Stats</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #0f172a;
+      color: #e5e7eb;
+      margin: 0;
+      padding: 40px;
+    }
+    h1 {
+      text-align: center;
+      margin-bottom: 30px;
+    }
+    .stats-container {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 20px;
+      max-width: 900px;
+      margin: auto;
+    }
+    .card {
+      background: #020617;
+      border-radius: 14px;
+      padding: 24px;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.4);
+    }
+    .card h2 {
+      margin: 0 0 15px;
+      font-size: 20px;
+      color: #38bdf8;
+    }
+    .stat {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 10px;
+      font-size: 15px;
+    }
+    .value {
+      font-weight: bold;
+      color: #22c55e;
+    }
+
+    #p2Visitors, #p1Visitors{
+      border: 2px solid white;
+      height: 400px;
+      width: 100%;
+      overflow-y: auto;
+      overflow-x: auto;
+      scroll-behavior: smooth;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Website Page Statistics</h1>
+
+  <div class="stats-container">
+    <!-- Page 1 -->
+    <div class="card">
+      <h2>Home Page</h2>
+       <div class="stat"><span >Visitors </span> > </div>
+     <div class="value " id="p1Visitors"></div>
+     <br>
+      <div class="stat"><span>Views</span><span class="value" id="p1Views">0</span></div>
+     
+    </div>
+
+    <!-- Page 2 -->
+    <div class="card">
+      <h2>Rewad Page</h2>
+       <div class="stat"><span >Visitors </span> > </div>
+      <div class="value " id="p2Visitors"></div>
+      <br>
+      <div class="stat"><span>Views</span><span class="value" id="p2Views">0</span></div>
+     
+      
+    </div>
+  </div>
+
+  <script>
+    // Example demo numbers (replace with real data from backend or analytics API)
+  
+    // document.getElementById('p1Views').textContent = stats.page1.views;
+    // document.getElementById('p1Visitors').textContent = stats.page1.visitors;
+    // document.getElementById('p1Clicks').textContent = stats.page1.clicks;
+
+   
+ 
+    fetch('/dash-api', {
+
+      method: 'POST', 
+      credentials:'include',
+      headers:{
+         'Content-Type': 'application/json',
+      },
+      
+     body: JSON.stringify({page: 'home'})
+    }).then( async response =>{
+                const data = await response.json()
+      console.log(data)
+       document.getElementById('p2Views').textContent = data.reward_stats_data.length;
+        for (let i = 0; i < data.reward_stats_data.length; i++) {
+          const element = data.reward_stats_data[i];
+            document.querySelector('#p2Visitors').insertAdjacentHTML("afterbegin", `
+           
+        <div class='d'> 
+          <p>Date:         ${element.date}  </p>
+            <p>IP:         ${element.Ip}  </p>
+              <p>country:         ${element.country}  </p> 
+                <p>city:         ${element.city}  </p>
+                  <p>page:         ${element.page}  </p>
+         
+        </div>
+        <hr><br>
+        `)
+        }
+
+         document.getElementById('p1Views').textContent = data.home_stats_data.length;
+        for (let i = 0; i < data.home_stats_data.length; i++) {
+          const element = data.home_stats_data[i];
+            document.querySelector('#p1Visitors').insertAdjacentHTML("afterbegin", `
+           
+        <div class='d'> 
+          <p>Date:         ${element.date}  </p>
+            <p>IP:         ${element.Ip}  </p>
+              <p>country:         ${element.country}  </p> 
+                <p>city:         ${element.city}  </p>
+                  <p>page:         ${element.page}  </p>
+
+        </div>
+         <hr><br>
+        `)
+        }
+      
+
+    })
+  </script>
+
+</body>
+
+
+
+
+</html>
