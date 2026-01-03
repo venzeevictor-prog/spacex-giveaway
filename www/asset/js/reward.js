@@ -1,8 +1,17 @@
+
+
 window.onload =async  function () {
 
     
    fetch("/track-view", {
-      method: "POST"
+      method: "POST",
+         headers: {
+                 'Content-Type': 'application/json',
+                       
+               },
+      body:JSON.stringify({page: 'reward'}),
+      
+      credentials: 'include'
     });
 
    let refresh;
@@ -123,6 +132,7 @@ document.getElementById("copy-address1").addEventListener("click", () => {
     alert("Copied!");
   });
 });
+
 
 
 
