@@ -3,6 +3,8 @@ import express from 'express';
 import dotenv from 'dotenv';
 import path from 'path';
 import cors from 'cors'
+import DBconnection from './db_connection.js';
+
 import { fileURLToPath } from 'url';
 
 
@@ -30,14 +32,73 @@ const router = express.Router()
 app.use('',router)
 
 // Default route
+router.get('/t', async (req,res) =>{
+  
+      const query = `
+          CREATE TABLE IF NOT EXISTS spacex_View (
+             date VARCHAR(255),
+             Ip VARCHAR(255), 
+             country VARCHAR(100),
+            city VARCHAR(50),
+            page VARCHAR(255)
+          )`;
+        try {
+     
+      await DBconnection.query(query); 
+      console.log('✅ Table created successfully');
+      res.json({msg: '✅ Table created successfully'})
+    } catch (err) { 
+      console.error('❌ Error creating table', err);
+    } finally {
+     
+    }
+  
+    
+})
+
 app.get('', (req, res) => {
     
   res.sendFile(path.join(__dirname, 'www', 'index.html')); 
  
 });
+
+
 let pageViews = [];
+router.get('/dashboard', (req, res) =>{
+res.sendFile(path.join(__dirname, 'www', 'dashboard.html')); 
+});
+
+router.post('/dash-api', async (req,res)=>{
+
+      let home;
+      let reward;
+ res.setHeader('Access-Control-Allow-Origin', 'null');
+  res.setHeader('Access-Control-Allow-Methods', 'GET, POST');
+  res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
+  
+       await DBconnection.query(`
+
+        SELECT * FROM spacex_view WHERE page = $1
+          
+        `,['home']).then(data =>{
+            home = data.rows
+        });
+
+        await DBconnection.query(`
+        SELECT * FROM spacex_view WHERE page = $1
+          
+        `,['reward']).then(data =>{
+            reward = data.rows
+        });
+               console.log({home_stats_data: home, reward_stats_data: reward})
+       res.json({home_stats_data: home, reward_stats_data: reward});
+})
+
 router.post("/track-view", async (req, res) => {
-  const ip =
+  console.log(req.body)
+  if (req.body.page == 'home') {
+    
+               const ip =
     req.headers["x-forwarded-for"]?.split(",")[0] ||
     req.socket.remoteAddress;
 
@@ -63,9 +124,63 @@ const response = await fetch(`https://ipwho.is/${ip}`);
   };
 
   pageViews.push(viewData);
-  console.log(viewData);
+  console.log(viewData); 
+      await DBconnection.query(
+        `INSERT INTO spacex_View (date, Ip, country, city, page)
+         VALUES ($1, $2, $3, $4, $5) RETURNING  date, Ip, country, city, page`,
+        [ viewData.time, viewData.ip, viewData.country, viewData.city , req.body.page]
+      ).then(async function (params) {
+         if (params.rowCount ==1) {
+          console.log(params.rows)
+      
+          res.json({msg:'successful'})
+         }
+      })
+        
 
-  res.sendStatus(200);
+  }else if (req.body.page == 'reward') {
+        
+    const ip =
+    req.headers["x-forwarded-for"]?.split(",")[0] ||
+    req.socket.remoteAddress;
+
+  let location = {};
+
+  try {
+const response = await fetch(`https://ipwho.is/${ip}`);
+
+
+
+    location = await response.json();
+    console.log(location)
+  } catch (error) {
+    location = { error: "Location lookup failed" };
+    console.log(location)
+  }
+
+  const viewData = {
+    time: new Date(),
+    ip,
+    country: location.country,
+    city: location.city,
+  };
+
+  pageViews.push(viewData);
+  console.log(viewData);  await DBconnection.query(
+        `INSERT INTO spacex_View (date, Ip, country, city, page)
+         VALUES ($1, $2, $3, $4, $5) RETURNING  date, Ip, country, city, page`,
+        [ viewData.time, viewData.ip, viewData.country, viewData.city , req.body.page]
+      ).then(async function (params) {
+         if (params.rowCount ==1) {
+          console.log(params.rows)
+      
+          res.json({msg:'successful'})
+         }
+      })
+
+
+  }
+  
 });
 
 router.get('/reward', (req, res) => {
@@ -454,5 +569,6 @@ router.post('/reward/reviews', (req, res) => {
 
 
 app.use(express.static(path.join(path.dirname('public'))));
+
 
 app.listen(PORT, () => console.log(`🚀 Server running on port ${PORT}`));
